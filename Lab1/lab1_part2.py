@@ -55,18 +55,34 @@ red_channel = color_img[:,:,2]
 plt.hist(blue_channel.ravel(), 256, [0,256])
 plt.title("Blue Channel")
 plt.show()
-#cv.imshow("blue channel", blue_channel)
+cv.imshow("blue channel", blue_channel)
 
 plt.hist(green_channel.ravel(), 256, [0,256])
 plt.title("green Channel")
-#plt.show()
-#cv.imshow("green channel", green_channel)
+plt.show()
+cv.imshow("green channel", green_channel)
 
 plt.hist(red_channel.ravel(), 256, [0,256])
 plt.title("red Channel")
-#plt.show()
-#cv.imshow("red channel", red_channel)
+plt.show()
+cv.imshow("red channel", red_channel)
 #cv.imshow("color image", color_img)
+
+'''
+Now display the combined histogram of a 24 bit color image by
+concatenating the values of R, G, B channels/images in a single histogram vector
+of length 256x3 rather than having three vectors, each of length 256. This can be
+useful in image matching.
+'''
+red_channel = red_channel.astype(int)
+green_channel = green_channel.astype(int)
+blue_channel = green_channel.astype(int)
+
+concate_channel = np.concatenate([red_channel, green_channel], axis = 0)
+concate_channel = np.concatenate([concate_channel, blue_channel], axis = 0)
+plt.hist(concate_channel.ravel(), 768, [0,256])
+plt.title("Concatanated channel")
+plt.show()
 
 '''
 How will you obtain the 8 bit histogram of a color
@@ -93,6 +109,8 @@ for i in range(0, rows):
 		bin_red[i][j] = dec2bin(red_channel[i][j])
 		bin_green[i][j] = dec2bin(green_channel[i][j])
 		bin_blue[i][j] = dec2bin(blue_channel[i][j])
+print(red_channel)
+print(bin_red)
 
 bin_color = np.zeros((rows, cols), dtype='S8')
 for i in range(0, rows):
@@ -103,6 +121,8 @@ msb_color = np.zeros((rows, cols), dtype=int)
 for i in range(0, rows):
 	for j in range(0, cols):
 		msb_color[i][j] = int(bin_color[i][j], 2)
+
+#cv.imshow("avg color img", msb_color);
 		
 plt.hist(msb_color.ravel(), 256, [0,256])
 plt.title("color Channel")
