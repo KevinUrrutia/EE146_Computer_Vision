@@ -11,6 +11,7 @@ otsu_thresh, bin_img = cv.threshold(img, 0, 255, cv.THRESH_OTSU)
 kernel = cv.getStructuringElement(cv.MORPH_RECT,(5,5))
 #dialate using the stucturing element to get rid of dots in forground
 dialate = cv.dilate(img, kernel, iterations=1)
+cv.imshow("dilate", dialate)
 
 #erode the image to return the rest of the image to original form
 erode = cv.erode(dialate, kernel, iterations=1)
