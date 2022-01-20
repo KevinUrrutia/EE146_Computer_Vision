@@ -1,6 +1,35 @@
 import cv2 as cv
 
 #open the image using opencv
+
+'''
+Dilate(I,H):
+    Input: I, a binary image
+    H, binary stucturing element
+    Returns dilated image I' = I or H
+
+    create map I' = I or H
+
+    for all(p) in MxN:
+        I'(p)<-0
+    for all q in H:
+        for all p in I:
+            I'(p+q) <- 1
+    return I'
+'''
+
+'''
+Erode(I, H):
+    Input: I, a binary image
+    H, binary stucturing element
+    Returns eroded image I' = I and H
+
+    invert_I  = invert(I)
+    H* = reflect(H)
+    I' = invert(dilate(inver_I, H*))
+    return I'
+'''
+
 img = cv.imread("../assets/morph_image.png", cv.IMREAD_GRAYSCALE)
 cv.imshow("original", img)
 
