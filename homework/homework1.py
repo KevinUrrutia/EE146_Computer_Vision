@@ -1,7 +1,7 @@
 '''
 Input: I, a scaler-valued input image with I(u,v) in the real number space.
 Output: Mean and variance of a histogram
-'''
+
 
 #read in the image
 img = cv.imread("../", cv.IMREAD_GRAYSCALE)
@@ -24,10 +24,10 @@ mean = (total_val) / (rows * cols)
 var = (sqr_total_val - ((rows*cols)(2 ** total_val))) * (rows * cols)
 return var and mean
 
-'''
+
 Input: I, a scaler-valued input image with I(u,v) in the real number space.
 Output: Thresheld image I_thresh
-'''
+
 #read in the image
 img = cv.imread("../", cv.IMREAD_GRAYSCALE)
 
@@ -49,10 +49,10 @@ for i in range(0,rows):
             img[i][j] = 0
 
 
-'''
+
 Input: I, a scaler-valued input image with I(u,v) in the real number space.
 Output: Mean and stadard deviation
-'''
+
 #Get the size of the image and save this information as rows and cols
 rows = img.shape[0]
 cols =  img.shape[1]
@@ -73,3 +73,16 @@ var = (sqr_total_val - ((rows*cols)(2 ** total_val))) * (rows * cols)
 #calculate standard deviation
 SD = sqr(var)
 return SD and mean
+
+'''
+
+import cv2 as cv
+import numpy as np
+
+img = np.array([[2 , 4, 7, 6],
+                [0, 3, 2, 5],
+                [6, 7, 2, 2],
+                [7, 6, 2, 7]])
+                
+otsu_thresh, bin_img = cv.threshold(img, 0, 255, cv.THRESH_OTSU)
+print(otsu_thresh)
